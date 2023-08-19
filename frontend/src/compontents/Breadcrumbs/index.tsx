@@ -1,17 +1,23 @@
 import * as React from 'react';
-import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
-
-function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    
-}
+import Stack from '@mui/material/Stack';
 
 export default function BasicBreadcrumbs() {
     return (
-        <div role="presentation" onClick={handleClick}>
+        <Stack
+            direction="row"
+            justifyContent="center"
+        >
             <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/creater/title">
+                <Link
+                    underline="hover"
+                    color="inherit" 
+                    href="/creater/title"
+                    onClick={() => {
+                        console.info("I'm a button.");
+                    }}
+                >
                     Название
                 </Link>
                 <Link
@@ -29,6 +35,6 @@ export default function BasicBreadcrumbs() {
                     Требования
                 </Link>
             </Breadcrumbs>
-        </div>
+        </Stack>
     );
 }

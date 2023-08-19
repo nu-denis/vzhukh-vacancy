@@ -1,16 +1,20 @@
-import React from 'react';
-
-import Breadcrumbs from './compontents/Breadcrumbs';
+import Container from '@mui/material/Container';
 import Router from './modules/router';
-
 import './App.css';
 
 function App() {
     return (
-        <>
-            <Breadcrumbs />
+        <Container 
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                height: "100vh"
+            }} 
+            maxWidth="xs"
+        >
             <Router />
-        </> 
+        </Container> 
     );
 }
 

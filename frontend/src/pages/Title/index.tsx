@@ -1,10 +1,13 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+
+import Breadcrumbs from '../../compontents/Breadcrumbs';
 
 const Title: React.FC = () => {
     return (
-        <div>
-            
-        </div>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Breadcrumbs />
+        </Box>
     );
 };
 
