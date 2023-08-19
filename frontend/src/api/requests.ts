@@ -2,13 +2,13 @@ import { UserInput } from "../models/userInput"
 
 export const getFastVacancy = async (data: UserInput) => {
 
+
     const requestData = JSON.stringify({
-        role: data.workerDescription,
-        content: data.aboutCompany
+        content_text: "asfwfas"
     });
 
     console.log(requestData);
-
+    
     const requestURL = `http://localhost:8000/open_format`;
     const request = new Request(requestURL, {
         method: 'POST',
