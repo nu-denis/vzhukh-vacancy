@@ -79,12 +79,8 @@ export const getVacancyText = async (vacancyName: string, description: string) =
 };
 
 export const getRewriteVacancy = async (vacancyId: string) => {
-
-    const requestData = JSON.stringify({
-        vacancy_id: vacancyId,
-    });
     
-    const requestURL = `http://localhost:8000/vacancy_text`;
+    const requestURL = `http://localhost:8000/prettify/vacancy/${vacancyId}`;
     const request = new Request(requestURL, {
         method: 'POST',
         headers: {
@@ -93,7 +89,6 @@ export const getRewriteVacancy = async (vacancyId: string) => {
             'Access-Control-Request-Headers': 'Content-Type',
         },
         redirect: 'follow',
-        body: requestData
     });
 
     const response = await fetch(request)

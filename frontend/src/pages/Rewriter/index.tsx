@@ -11,12 +11,15 @@ type VacancyButton = 'primary' | 'success';
 
 const Rewriter: React.FC = () => {
     const [vacancyButton, setVacancyButton] = useState<VacancyButton>('primary');
-    const [vacancyId, setVacancyId] = useState<string>('');
+    const [vacancyId, setVacancyId] = useState<string>(localStorage.getItem('vacancyId') || '');
+    const [vacancyText, setVacancyText] = useState<string>(localStorage.getItem('vacancyText') || '');
 
-    // const vacancyHandler = useCallback(async(data: UserInput) => {
-    //     const vacancy = await getRewriteVacancy(`${data.workerDescription} ${data.aboutCompany}`);
-    //     setVacancy(vacancy);
-    // }, [workerDescription, aboutCompany])
+    const vacancyHandler = useCallback(async(data: string) => {
+        console.log('request');
+        const vacancy = await getRewriteVacancy(data);
+        console.log('response');
+        setVacancyText(vacancy);
+    }, [vacancyId, vacancyText])
     return (
         <Stack
             direction="column"
@@ -39,14 +42,22 @@ const Rewriter: React.FC = () => {
                 <TextField
                     hiddenLabel
                     id="filled-hidden-label-small"
-                    onChange={() => {}}
+                    onChange={(e) => {
+                        setVacancyId(e.target.value);
+                        localStorage.setItem('vacancyId', e.target.value);
+                    }}
                     defaultValue={vacancyId}
                     variant="filled"
                     size="small"
                     fullWidth
                     sx={{ paddingBottom: "5px" }}
                 />
-                <Button variant="contained" href="">
+                <Button
+                    variant="contained" 
+                    onClick={() => {
+                        vacancyHandler(vacancyId);
+                    }}
+                >
                     Переписать
                 </Button>
             </Stack>
@@ -62,6 +73,10 @@ const Rewriter: React.FC = () => {
                 <TextField
                     hiddenLabel
                     id="filled-multiline-static"
+                    onChange={(e) => {
+                        setVacancyText(e.target.value);
+                        localStorage.setItem('vacancyText', e.target.value);
+                    }}
                     multiline
                     rows={18}
                     defaultValue=""
@@ -70,10 +85,18 @@ const Rewriter: React.FC = () => {
                     sx={{ paddingBottom: "5px" }}
                 />
                 <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                    <Button variant="outlined" href="/">
+                    <Button
+                        variant="outlined"
+                        href="/"
+                        onClick={() => localStorage.setItem('vacancyText', '')}
+                    >
                         Вернуться
                     </Button>
-                    <Button variant="contained" href="" color={vacancyButton}>
+                    <Button
+                        variant="contained"
+                        href=""
+                        onClick={() => localStorage.setItem('vacancyText', vacancyId)}
+                    >
                         Сохранить вакансию
                     </Button>
                 </Box>

@@ -93,6 +93,10 @@ const FastGeneration: React.FC = () => {
                     <TextField
                         hiddenLabel
                         id="filled-multiline-static"
+                        onChange={(e) => {
+                            setVacancyText(e.target.value);
+                            localStorage.setItem('vacancyText', e.target.value);
+                        }}
                         multiline
                         rows={10}
                         defaultValue={vacancyText}
@@ -101,10 +105,18 @@ const FastGeneration: React.FC = () => {
                         sx={{ paddingBottom: "5px" }}
                     />
                     <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                        <Button variant="outlined" href="/">
+                        <Button
+                            variant="outlined"
+                            href="/"
+                            onClick={() => localStorage.setItem('vacancyText', '')}
+                        >
                             Вернуться
                         </Button>
-                        <Button variant="contained" href="">
+                        <Button
+                            variant="contained"
+                            href=""
+                            onClick={() => localStorage.setItem('vacancyText', vacancyText)}
+                        >
                             Сохранить вакансию
                         </Button>
                     </Box>
