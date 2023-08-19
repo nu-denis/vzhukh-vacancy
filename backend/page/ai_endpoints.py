@@ -82,6 +82,22 @@ async def vacancy_text(vacancy_name: str = '', description: str = ''):
     }]))
 
 
+@router.get('/vacancy_text_for_company')
+async def vacancy_text(
+        vacancy_name: str = '',
+        company_description: str = '',
+        description: str = '',
+        vacancy_blocks: str = 'Описание вакансии, Обязанности, Требования, Условия'
+):
+    prompt_vacancy_text = 'Напиши текст вакансии: {} для компании в сфере {}, с учётом текста: {} в формате Markdown и оставь ' \
+                          'только разделы: {}'
+
+    return get_text_from_resp(ai_request([{
+        'role': 'user',
+        'content': prompt_vacancy_text.format(vacancy_name, company_description, description, vacancy_blocks)
+    }]))
+
+
 @router.get('/prettify/vacancy/{vacancy_id}')
 async def prettify_vacancy(vacancy_id: str):
     prompt_template = 'ты рекрутер, распиши обязанности, требования и условия для вакансии: {vac_description}'
