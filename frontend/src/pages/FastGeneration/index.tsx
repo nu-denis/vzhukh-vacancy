@@ -5,12 +5,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import Breadcrumbs from '../../compontents/Breadcrumbs';
-
-const Functions: React.FC = () => {
+const FastGeneration: React.FC = () => {
     return (
         <>
-            <Breadcrumbs />
             <Stack
                 direction="column"
                 justifyContent="center"
@@ -18,7 +15,7 @@ const Functions: React.FC = () => {
                 spacing={3} 
             >
                 <Box sx={{ display: "flex", justifyContent: "center", width: "calc(100% - 40px)", padding: "20px 20px 0px" }}>
-                    <Typography variant="h6" component="h2">Создать новую вакансию - шаг 2</Typography> 
+                    <Typography variant="h6" component="h2">Быстрая генерация</Typography> 
                 </Box>
                 <Stack
                     direction="column"
@@ -37,10 +34,27 @@ const Functions: React.FC = () => {
                         defaultValue=""
                         variant="filled"
                         fullWidth
+                    />
+                </Stack>
+                <Stack
+                    direction="column"
+                    justifyContent="center"
+                    spacing={1}
+                    sx={{ width: "100%" }}
+                >
+                    <Typography variant="body1" component="p">
+                        Напишите пару слов о своей компании
+                    </Typography>
+                    <TextField
+                        hiddenLabel
+                        id="filled-basic"
+                        defaultValue=""
+                        variant="filled"
+                        fullWidth
                         sx={{ paddingBottom: "5px" }}
                     />
                     <Button variant="contained" href="">
-                        Сгенерировать Обязанности
+                        Получить вакансию
                     </Button>
                 </Stack>
                 <Stack
@@ -49,25 +63,22 @@ const Functions: React.FC = () => {
                     spacing={1}
                     sx={{ width: "100%" }}
                 >
-                    <Typography variant="body1" component="p" sx={{ paddingBottom: "5px" }}>
-                        Выберите подходящие обязанности
-                    </Typography>
                     <TextField
                         hiddenLabel
                         id="filled-multiline-static"
                         multiline
-                        rows={12}
+                        rows={10}
                         defaultValue=""
                         variant="filled"
                         fullWidth
                         sx={{ paddingBottom: "5px" }}
                     />
                     <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                        <Button variant="outlined" href="/creator/title">
+                        <Button variant="outlined" href="/">
                             Вернуться
                         </Button>
-                        <Button variant="contained" href="/creator/prerequisites">
-                            Следующий шаг
+                        <Button variant="contained" href="">
+                            Сохранить вакансию
                         </Button>
                     </Box>
                 </Stack>  
@@ -76,4 +87,4 @@ const Functions: React.FC = () => {
     );
 };
 
-export default Functions;
+export default FastGeneration;

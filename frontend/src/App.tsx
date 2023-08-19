@@ -9,7 +9,8 @@ function App() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                height: "100vh"
+                minHeight: "100vh",
+                padding: "10px 0",
             }} 
             maxWidth="xs"
         >

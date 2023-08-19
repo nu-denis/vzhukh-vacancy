@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 import Breadcrumbs from '../../compontents/Breadcrumbs';
 
-const Functions: React.FC = () => {
+const Result: React.FC = () => {
     return (
         <>
             <Breadcrumbs />
@@ -18,7 +18,7 @@ const Functions: React.FC = () => {
                 spacing={3} 
             >
                 <Box sx={{ display: "flex", justifyContent: "center", width: "calc(100% - 40px)", padding: "20px 20px 0px" }}>
-                    <Typography variant="h6" component="h2">Создать новую вакансию - шаг 2</Typography> 
+                    <Typography variant="h6" component="h2">Создать новую вакансию - шаг 4</Typography> 
                 </Box>
                 <Stack
                     direction="column"
@@ -63,11 +63,11 @@ const Functions: React.FC = () => {
                         sx={{ paddingBottom: "5px" }}
                     />
                     <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                        <Button variant="outlined" href="/creator/title">
+                        <Button variant="outlined" href="/creator/prerequisites">
                             Вернуться
                         </Button>
-                        <Button variant="contained" href="/creator/prerequisites">
-                            Следующий шаг
+                        <Button variant="contained" href="">
+                            Сохранить вакансию
                         </Button>
                     </Box>
                 </Stack>  
@@ -76,4 +76,4 @@ const Functions: React.FC = () => {
     );
 };
 
-export default Functions;
+export default Result;

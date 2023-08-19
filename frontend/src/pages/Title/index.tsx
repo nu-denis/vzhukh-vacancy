@@ -18,7 +18,7 @@ const Title: React.FC = () => {
                 spacing={3} 
             >
                 <Box sx={{ display: "flex", justifyContent: "center", width: "calc(100% - 40px)", padding: "20px 20px 0px" }}>
-                    <Typography variant="h6" component="h2">Создать новую вакансию</Typography> 
+                    <Typography variant="h6" component="h2">Создать новую вакансию - шаг 1</Typography> 
                 </Box>
                 <Stack
                     direction="column"
@@ -37,6 +37,23 @@ const Title: React.FC = () => {
                         defaultValue=""
                         variant="filled"
                         fullWidth
+                    />
+                </Stack>
+                <Stack
+                    direction="column"
+                    justifyContent="center"
+                    spacing={1}
+                    sx={{ width: "100%" }}
+                >
+                    <Typography variant="body1" component="p">
+                        Напишите пару слов о своей компании
+                    </Typography>
+                    <TextField
+                        hiddenLabel
+                        id="filled-basic"
+                        defaultValue=""
+                        variant="filled"
+                        fullWidth
                         sx={{ paddingBottom: "5px" }}
                     />
                     <Button variant="contained" href="">
@@ -50,13 +67,13 @@ const Title: React.FC = () => {
                     sx={{ width: "100%" }}
                 >
                     <Typography variant="body1" component="p" sx={{ paddingBottom: "5px" }}>
-                        Ваша вакансия
+                        Выберете название, которое вам больше всего понравилось
                     </Typography>
                     <TextField
                         hiddenLabel
                         id="filled-multiline-static"
                         multiline
-                        rows={12}
+                        rows={6}
                         defaultValue=""
                         variant="filled"
                         fullWidth

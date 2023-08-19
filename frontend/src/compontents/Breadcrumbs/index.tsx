@@ -9,30 +9,34 @@ export default function BasicBreadcrumbs() {
             justifyContent="center"
             sx={{ backgroundColor: "#eee", padding: "10px", borderRadius: "5px" }}
         >
-            <Breadcrumbs aria-label="breadcrumb">
+            <Breadcrumbs aria-label="breadcrumb" sx={{ fontSize: "12px" }}>
                 <Link
                     underline="hover"
                     color="inherit" 
                     href="/creator/title"
-                    onClick={() => {
-                        console.info("I'm a button.");
-                    }}
                 >
-                    Название
+                    1. Название
                 </Link>
                 <Link
                     underline="hover"
                     color="inherit"
                     href="/creator/functions"
                 >
-                    Обязанности
+                    2. Обязанности
                 </Link>
                 <Link
                     underline="hover"
                     color="inherit"
                     href="/creator/prerequisites"
                 >
-                    Требования
+                    3. Требования
+                </Link>
+                <Link
+                    underline="hover"
+                    color="inherit"
+                    href="/creator/result"
+                >
+                    4. Результат
                 </Link>
             </Breadcrumbs>
         </Stack>

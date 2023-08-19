@@ -14,6 +14,9 @@ const Index: React.FC = () => {
             <Box sx={{ display: "flex", justifyContent: "center", paddingBottom: "10px" }}>
                 <Typography variant="h4" component="h2">Что вы хотите сделать?</Typography> 
             </Box>
+            <Button variant="contained" href="/fast_generation" color="success">
+                Быстрая генерация вакансии
+            </Button>
             <Button variant="contained" href="/creator/title">
                 Создать новую вакансию
             </Button>

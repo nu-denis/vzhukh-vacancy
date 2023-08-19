@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+type VacancyButton = 'primary' | 'success';
+
 const Rewriter: React.FC = () => {
+    const [vacancyButton, setVacancyButton] = useState<VacancyButton>('primary');
     return (
         <Stack
             direction="column"
@@ -13,7 +16,7 @@ const Rewriter: React.FC = () => {
             alignItems="start"
             spacing={3} 
         >
-            <Box sx={{ display: "flex", justifyContent: "center", width: "100%", paddingBottom: "20px" }}>
+            <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
                 <Typography variant="h6" component="h2">Переписать существующую вакансию</Typography> 
             </Box>
             <Stack
@@ -51,7 +54,7 @@ const Rewriter: React.FC = () => {
                     hiddenLabel
                     id="filled-multiline-static"
                     multiline
-                    rows={12}
+                    rows={18}
                     defaultValue=""
                     variant="filled"
                     fullWidth
@@ -61,8 +64,8 @@ const Rewriter: React.FC = () => {
                     <Button variant="outlined" href="/">
                         Вернуться
                     </Button>
-                    <Button variant="contained" href="">
-                        Сохранить изменения
+                    <Button variant="contained" href="" color={vacancyButton}>
+                        Сохранить вакансию
                     </Button>
                 </Box>
             </Stack>  

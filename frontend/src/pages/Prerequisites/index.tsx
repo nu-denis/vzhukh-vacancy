@@ -18,7 +18,7 @@ const Prerequisites: React.FC = () => {
                 spacing={3} 
             >
                 <Box sx={{ display: "flex", justifyContent: "center", width: "calc(100% - 40px)", padding: "20px 20px 0px" }}>
-                    <Typography variant="h6" component="h2">Создать новую вакансию</Typography> 
+                    <Typography variant="h6" component="h2">Создать новую вакансию - шаг 3</Typography> 
                 </Box>
                 <Stack
                     direction="column"
@@ -50,7 +50,7 @@ const Prerequisites: React.FC = () => {
                     sx={{ width: "100%" }}
                 >
                     <Typography variant="body1" component="p" sx={{ paddingBottom: "5px" }}>
-                        Ваша вакансия
+                        Выберите подходящие требования
                     </Typography>
                     <TextField
                         hiddenLabel
@@ -66,8 +66,8 @@ const Prerequisites: React.FC = () => {
                         <Button variant="outlined" href="/creator/functions">
                             Вернуться
                         </Button>
-                        <Button variant="contained" href="">
-                            Сохранить изменения
+                        <Button variant="contained" href="/creator/result">
+                            Следующий шаг
                         </Button>
                     </Box>
                 </Stack>  
