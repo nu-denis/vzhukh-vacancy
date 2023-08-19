@@ -52,7 +52,18 @@ async def open_format(content_text: Optional[str] = Body(embed=True)):  # TODO: 
 
 @router.get('/vacancy_name')
 async def vacancy_name(description: str = ''):
-    prompt_vacancy = 'Предложи название вакансии по описанию: {} по шаблону: (Название вакансии: ОТВЕТ)'
+    prompt_vacancy = 'Предложи короткое название вакансии по описанию: {}. Верни в ответе только название'
+
+    resp = get_text_from_resp(ai_request([{
+        'role': 'user',
+        'content': prompt_vacancy.format(description)
+    }]))
+    return resp.split(':')[-1]
+
+
+@router.get('/several_vacancy_names')
+async def vacancy_name(description: str = ''):
+    prompt_vacancy = 'Предложи 5 названий вакансий по описанию: {}'
 
     return get_text_from_resp(ai_request([{
         'role': 'user',
@@ -63,12 +74,28 @@ async def vacancy_name(description: str = ''):
 @router.get('/vacancy_text')
 async def vacancy_text(vacancy_name: str = '', description: str = ''):
     vacancy_blocks = 'Описание вакансии, Обязанности, Требования, Условия'
-    prompt_vacancy_text = 'Напиши текст для вакансии: {} в вейп-шоп, с учётом текста: {} в формате Markdown и оставь ' \
+    prompt_vacancy_text = 'Напиши текст для вакансии: {}, с учётом текста: {} в формате Markdown и оставь ' \
                           'только разделы: {}'
 
     return get_text_from_resp(ai_request([{
         'role': 'user',
         'content': prompt_vacancy_text.format(vacancy_name, description, vacancy_blocks)
+    }]))
+
+
+@router.get('/vacancy_text_for_company')
+async def vacancy_text(
+        vacancy_name: str = '',
+        company_description: str = '',
+        description: str = '',
+        vacancy_blocks: str = 'Описание вакансии, Обязанности, Требования, Условия'
+):
+    prompt_vacancy_text = 'Напиши текст вакансии: {} для компании в сфере {}, с учётом текста: {} в формате Markdown и оставь ' \
+                          'только разделы: {}'
+
+    return get_text_from_resp(ai_request([{
+        'role': 'user',
+        'content': prompt_vacancy_text.format(vacancy_name, company_description, description, vacancy_blocks)
     }]))
 
 
@@ -89,4 +116,4 @@ async def prettify_vacancy(vacancy_id: str):
     raw_vac_text = BeautifulSoup(vacancy_json['description']).get_text()
     text = prompt_template.format(vac_description=raw_vac_text)
 
-    return ai_request([{'role': 'user', 'content': text}])
+    return get_text_from_resp(ai_request([{'role': 'user', 'content': text}]))
