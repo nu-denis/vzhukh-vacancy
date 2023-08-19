@@ -12,12 +12,10 @@ const FastGeneration: React.FC = () => {
     const [aboutCompany, setAboutCompany] = useState<string>(localStorage.getItem('aboutCompany') || '');
     const [vacancy, setVacancy] = useState<any>('');
 
-    const vacancyHandler = useCallback(() => {
-        (async() => {
-            const vacancy = await getFastVacancy({ workerDescription, aboutCompany });
+    const vacancyHandler = useCallback(async() => {
+        const vacancy = await getFastVacancy({ workerDescription, aboutCompany });
             setVacancy(vacancy);
-        })();
-    }, [])
+    }, [workerDescription, aboutCompany])
 
     return (
         <>
@@ -77,7 +75,7 @@ const FastGeneration: React.FC = () => {
                     <Button
                         variant="contained"
                         onClick={() => {
-                            getFastVacancy({ workerDescription, aboutCompany });
+                            vacancyHandler();
                         }}
                     >
                         Получить вакансию
