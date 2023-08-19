@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import { getFastVacancy } from '../../api/requests';
+
 const FastGeneration: React.FC = () => {
     const [workerDescription, setWorkerDescription] = useState<string>(localStorage.getItem('workerDescription') || '');
     const [aboutCompany, setAboutCompany] = useState<string>(localStorage.getItem('aboutCompany') || '');
+    const [vacancy, setVacancy] = useState<any>('');
+
+    const vacancyHandler = useCallback(() => {
+        (async() => {
+            const vacancy = await getFastVacancy({ workerDescription, aboutCompany });
+            setVacancy(vacancy);
+        })();
+    }, [])
 
     return (
         <>
@@ -64,7 +74,12 @@ const FastGeneration: React.FC = () => {
                         fullWidth
                         sx={{ paddingBottom: "5px" }}
                     />
-                    <Button variant="contained" href="">
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                            getFastVacancy({ workerDescription, aboutCompany });
+                        }}
+                    >
                         Получить вакансию
                     </Button>
                 </Stack>
@@ -79,7 +94,7 @@ const FastGeneration: React.FC = () => {
                         id="filled-multiline-static"
                         multiline
                         rows={10}
-                        defaultValue=""
+                        defaultValue={vacancy}
                         variant="filled"
                         fullWidth
                         sx={{ paddingBottom: "5px" }}
