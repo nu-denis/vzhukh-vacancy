@@ -52,12 +52,13 @@ async def open_format(content_text: Optional[str] = Body(embed=True)):  # TODO: 
 
 @router.get('/vacancy_name')
 async def vacancy_name(description: str = ''):
-    prompt_vacancy = 'Предложи название вакансии по описанию: {} по шаблону: (Название вакансии: ОТВЕТ)'
+    prompt_vacancy = 'Предложи короткое название вакансии по описанию: {}. Верни в ответе только название'
 
-    return get_text_from_resp(ai_request([{
+    resp = get_text_from_resp(ai_request([{
         'role': 'user',
         'content': prompt_vacancy.format(description)
     }]))
+    return resp.split(':')[-1]
 
 
 @router.get('/several_vacancy_names')
@@ -73,7 +74,7 @@ async def vacancy_name(description: str = ''):
 @router.get('/vacancy_text')
 async def vacancy_text(vacancy_name: str = '', description: str = ''):
     vacancy_blocks = 'Описание вакансии, Обязанности, Требования, Условия'
-    prompt_vacancy_text = 'Напиши текст для вакансии: {} в вейп-шоп, с учётом текста: {} в формате Markdown и оставь ' \
+    prompt_vacancy_text = 'Напиши текст для вакансии: {}, с учётом текста: {} в формате Markdown и оставь ' \
                           'только разделы: {}'
 
     return get_text_from_resp(ai_request([{
