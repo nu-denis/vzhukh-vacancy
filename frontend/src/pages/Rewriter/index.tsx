@@ -79,7 +79,7 @@ const Rewriter: React.FC = () => {
                     }}
                     multiline
                     rows={18}
-                    defaultValue=""
+                    defaultValue={vacancyText}
                     variant="filled"
                     fullWidth
                     sx={{ paddingBottom: "5px" }}

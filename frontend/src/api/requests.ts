@@ -82,10 +82,10 @@ export const getRewriteVacancy = async (vacancyId: string) => {
     
     const requestURL = `http://localhost:8000/prettify/vacancy/${vacancyId}`;
     const request = new Request(requestURL, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Method': 'GET',
             'Access-Control-Request-Headers': 'Content-Type',
         },
         redirect: 'follow',
