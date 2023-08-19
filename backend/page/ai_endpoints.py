@@ -60,6 +60,16 @@ async def vacancy_name(description: str = ''):
     }]))
 
 
+@router.get('/several_vacancy_names')
+async def vacancy_name(description: str = ''):
+    prompt_vacancy = 'Предложи 5 названий вакансий по описанию: {}'
+
+    return get_text_from_resp(ai_request([{
+        'role': 'user',
+        'content': prompt_vacancy.format(description)
+    }]))
+
+
 @router.get('/vacancy_text')
 async def vacancy_text(vacancy_name: str = '', description: str = ''):
     vacancy_blocks = 'Описание вакансии, Обязанности, Требования, Условия'
