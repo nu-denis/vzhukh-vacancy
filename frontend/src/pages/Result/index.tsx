@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '../../compontents/Breadcrumbs';
 
 const Result: React.FC = () => {
+    const [vacancyName, setVacancyName] = useState<string>(localStorage.getItem('vacancyName') || '');
+    const [vacancyText, setVacancyText] = useState<string>(localStorage.getItem('vacancyText') || '');
     return (
         <>
             <Breadcrumbs />
@@ -26,38 +28,15 @@ const Result: React.FC = () => {
                     spacing={1}
                     sx={{ width: "100%" }}
                 >
-                    <Typography variant="body1" component="p">
-                        Напишите в свободной форме, кого вы ищете или чем будет заниматься сотрудник?
-                    </Typography>
-                    <TextField
-                        hiddenLabel
-                        id="filled-multiline-static"
-                        multiline
-                        rows={3}
-                        defaultValue=""
-                        variant="filled"
-                        fullWidth
-                        sx={{ paddingBottom: "5px" }}
-                    />
-                    <Button variant="contained" href="">
-                        Сгенерировать Обязанности
-                    </Button>
-                </Stack>
-                <Stack
-                    direction="column"
-                    justifyContent="center"
-                    spacing={1}
-                    sx={{ width: "100%" }}
-                >
                     <Typography variant="body1" component="p" sx={{ paddingBottom: "5px" }}>
-                        Выберите подходящие обязанности
+                        Ваша вакансия
                     </Typography>
                     <TextField
                         hiddenLabel
                         id="filled-multiline-static"
                         multiline
-                        rows={12}
-                        defaultValue=""
+                        rows={22}
+                        defaultValue={`${vacancyName}\n \n${vacancyText}`}
                         variant="filled"
                         fullWidth
                         sx={{ paddingBottom: "5px" }}

@@ -55,7 +55,7 @@ export const getVacancyName = async (description: string) => {
 
 export const getVacancyText = async (vacancyName: string, description: string) => {
     
-    const requestURL = `http://localhost:8000/vacancy_text?vacancy_name=${vacancyName}&description=${description}`;
+    const requestURL = `http://localhost:8000/vacancy_text?vacancy_name=&description=${vacancyName} ${description}`;
     const request = new Request(requestURL, {
         method: 'GET',
         headers: {
