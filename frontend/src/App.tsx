@@ -1,11 +1,16 @@
 import React from 'react';
+
+import Breadcrumbs from './compontents/Breadcrumbs';
+import Router from './modules/router';
+
 import './App.css';
 
 function App() {
     return (
-        <div className="App">
-            Hello World!
-        </div>
+        <>
+            <Breadcrumbs />
+            <Router />
+        </> 
     );
 }
 
