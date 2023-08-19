@@ -89,4 +89,4 @@ async def prettify_vacancy(vacancy_id: str):
     raw_vac_text = BeautifulSoup(vacancy_json['description']).get_text()
     text = prompt_template.format(vac_description=raw_vac_text)
 
-    return ai_request([{'role': 'user', 'content': text}])
+    return get_text_from_resp(ai_request([{'role': 'user', 'content': text}]))
