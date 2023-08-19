@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,7 +7,19 @@ import Typography from '@mui/material/Typography';
 
 import Breadcrumbs from '../../compontents/Breadcrumbs';
 
+import { getVacancyText } from '../../api/requests';
+
 const Prerequisites: React.FC = () => {
+    const [vacancyName, setVacancyName] = useState<string>(localStorage.getItem('vacancyName') || '');
+    const [workerDescription, setWorkerDescription] = useState<string>(localStorage.getItem('workerDescription') || '');
+    const [aboutCompany, setAboutCompany] = useState<string>(localStorage.getItem('aboutCompany') || '');
+    const [vacancyText, setVacancyText] = useState<string>(localStorage.getItem('vacancyText') || '');
+    
+    const vacancyTextHandler = useCallback(async(vacancyName: string, description: string) => {
+        const vacancy = await getVacancyText(vacancyName, description);
+        setVacancyText(vacancy);
+    }, [vacancyName, workerDescription])
+
     return (
         <>
             <Breadcrumbs />
@@ -32,14 +44,23 @@ const Prerequisites: React.FC = () => {
                     <TextField
                         hiddenLabel
                         id="filled-multiline-static"
+                        onChange={(e) => {
+                            setWorkerDescription(e.target.value);
+                            localStorage.setItem('workerDescription', e.target.value);
+                        }}
                         multiline
                         rows={3}
-                        defaultValue=""
+                        defaultValue={workerDescription}
                         variant="filled"
                         fullWidth
                         sx={{ paddingBottom: "5px" }}
                     />
-                    <Button variant="contained" href="">
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                            vacancyTextHandler(vacancyName, workerDescription);
+                        }}
+                    >
                         Сгенерировать требования
                     </Button>
                 </Stack>
@@ -55,9 +76,13 @@ const Prerequisites: React.FC = () => {
                     <TextField
                         hiddenLabel
                         id="filled-multiline-static"
+                        onChange={(e) => {
+                            setVacancyText(e.target.value);
+                            localStorage.setItem('vacancyText', e.target.value);
+                        }}
                         multiline
                         rows={12}
-                        defaultValue=""
+                        defaultValue={vacancyText}
                         variant="filled"
                         fullWidth
                         sx={{ paddingBottom: "5px" }}
@@ -66,7 +91,11 @@ const Prerequisites: React.FC = () => {
                         <Button variant="outlined" href="/creator/functions">
                             Вернуться
                         </Button>
-                        <Button variant="contained" href="/creator/result">
+                        <Button
+                            variant="contained"
+                            href="/creator/result"
+                            onClick={() => localStorage.setItem('vacancyText', vacancyText)}
+                        >
                             Следующий шаг
                         </Button>
                     </Box>

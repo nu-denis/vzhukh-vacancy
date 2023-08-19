@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -6,11 +6,18 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import Breadcrumbs from '../../compontents/Breadcrumbs';
+import { getVacancyName } from '../../api/requests';
 
 const Title: React.FC = () => {
     const [workerDescription, setWorkerDescription] = useState<string>(localStorage.getItem('workerDescription') || '');
     const [aboutCompany, setAboutCompany] = useState<string>(localStorage.getItem('aboutCompany') || '');
+    const [vacancyName, setVacancyName] = useState<string>(localStorage.getItem('vacancyName') || '');
     
+    const vacancyNameHandler = useCallback(async(data: string) => {
+        const vacancy = await getVacancyName(data);
+        setVacancyName(vacancy);
+    }, [workerDescription, aboutCompany])
+
     return (
         <>
             <Breadcrumbs />
@@ -67,7 +74,10 @@ const Title: React.FC = () => {
                         fullWidth
                         sx={{ paddingBottom: "5px" }}
                     />
-                    <Button variant="contained" href="">
+                    <Button
+                        variant="contained"
+                        onClick={() => vacancyNameHandler(workerDescription)}
+                    >
                         Сгенерировать название
                     </Button>
                 </Stack>
@@ -83,9 +93,13 @@ const Title: React.FC = () => {
                     <TextField
                         hiddenLabel
                         id="filled-multiline-static"
+                        onChange={(e) => {
+                            setVacancyName(e.target.value);
+                            localStorage.setItem('vacancyName', e.target.value);
+                        }}
                         multiline
                         rows={6}
-                        defaultValue=""
+                        defaultValue={vacancyName}
                         variant="filled"
                         fullWidth
                         sx={{ paddingBottom: "5px" }}
@@ -94,7 +108,11 @@ const Title: React.FC = () => {
                         <Button variant="outlined" href="/">
                             Вернуться
                         </Button>
-                        <Button variant="contained" href="/creator/functions">
+                        <Button
+                            variant="contained"
+                            href="/creator/functions"
+                            onClick={() => localStorage.setItem('vacancyName', vacancyName)}
+                        >
                             Следующий шаг
                         </Button>
                     </Box>

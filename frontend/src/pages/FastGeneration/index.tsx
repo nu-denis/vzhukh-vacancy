@@ -1,21 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import { getFastVacancy } from '../../api/requests';
+import { getVacancyText } from '../../api/requests';
+import { UserInput } from '../../models/userInput';
 
 const FastGeneration: React.FC = () => {
     const [workerDescription, setWorkerDescription] = useState<string>(localStorage.getItem('workerDescription') || '');
     const [aboutCompany, setAboutCompany] = useState<string>(localStorage.getItem('aboutCompany') || '');
-    const [vacancy, setVacancy] = useState<any>('');
+    const [vacancyText, setVacancyText] = useState<string>(localStorage.getItem('vacancyText') || '');
 
-    const vacancyHandler = useCallback(async() => {
-        const vacancy = await getFastVacancy({ workerDescription, aboutCompany });
-            setVacancy(vacancy);
-    }, [workerDescription, aboutCompany])
+    const vacancyHandler = useCallback(async(data: UserInput) => {
+        console.log('request');
+        const vacancy = await getVacancyText(data.workerDescription, data.aboutCompany);
+        console.log('response');
+        setVacancyText(vacancy);
+    }, [workerDescription, aboutCompany, vacancyText])
 
     return (
         <>
@@ -75,7 +78,7 @@ const FastGeneration: React.FC = () => {
                     <Button
                         variant="contained"
                         onClick={() => {
-                            vacancyHandler();
+                            vacancyHandler({ workerDescription, aboutCompany });
                         }}
                     >
                         Получить вакансию
@@ -92,7 +95,7 @@ const FastGeneration: React.FC = () => {
                         id="filled-multiline-static"
                         multiline
                         rows={10}
-                        defaultValue={vacancy}
+                        defaultValue={vacancyText}
                         variant="filled"
                         fullWidth
                         sx={{ paddingBottom: "5px" }}

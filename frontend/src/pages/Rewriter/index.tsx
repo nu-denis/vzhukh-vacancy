@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import { getRewriteVacancy } from '../../api/requests';
+
 type VacancyButton = 'primary' | 'success';
 
 const Rewriter: React.FC = () => {
     const [vacancyButton, setVacancyButton] = useState<VacancyButton>('primary');
+    const [vacancyId, setVacancyId] = useState<string>('');
+
+    // const vacancyHandler = useCallback(async(data: UserInput) => {
+    //     const vacancy = await getRewriteVacancy(`${data.workerDescription} ${data.aboutCompany}`);
+    //     setVacancy(vacancy);
+    // }, [workerDescription, aboutCompany])
     return (
         <Stack
             direction="column"
@@ -31,7 +39,8 @@ const Rewriter: React.FC = () => {
                 <TextField
                     hiddenLabel
                     id="filled-hidden-label-small"
-                    defaultValue=""
+                    onChange={() => {}}
+                    defaultValue={vacancyId}
                     variant="filled"
                     size="small"
                     fullWidth
