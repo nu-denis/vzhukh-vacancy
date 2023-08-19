@@ -1,4 +1,8 @@
 from typing import Optional
+import http.client
+import json
+import ssl
+from bs4 import BeautifulSoup
 
 from router import router
 from fastapi import Body
@@ -66,3 +70,23 @@ async def vacancy_text(vacancy_name: str = '', description: str = ''):
         'role': 'user',
         'content': prompt_vacancy_text.format(vacancy_name, description, vacancy_blocks)
     }]))
+
+
+@router.get('/prettify/vacancy/{vacancy_id}')
+async def prettify_vacancy(vacancy_id: str):
+    prompt_template = 'ты рекрутер, распиши обязанности, требования и условия для вакансии: {vac_description}'
+
+    host = '94.124.200.0'  # hh.ru, api.hh.ru
+    conn = http.client.HTTPSConnection(host, context=ssl._create_unverified_context())
+    conn.request('GET', f'/vacancies/{vacancy_id}', headers={
+        'Accept': 'application/json',
+        'Host': 'api.hh.ru',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+    })
+    response = conn.getresponse()
+    vacancy_json = json.loads(response.read()) if response.status < 400 else None
+
+    raw_vac_text = BeautifulSoup(vacancy_json['description']).get_text()
+    text = prompt_template.format(vac_description=raw_vac_text)
+
+    return ai_request([{'role': 'user', 'content': text}])
