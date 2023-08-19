@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -6,6 +6,9 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 const FastGeneration: React.FC = () => {
+    const [workerDescription, setWorkerDescription] = useState<string>(localStorage.getItem('workerDescription') || '');
+    const [aboutCompany, setAboutCompany] = useState<string>(localStorage.getItem('aboutCompany') || '');
+
     return (
         <>
             <Stack
@@ -29,9 +32,13 @@ const FastGeneration: React.FC = () => {
                     <TextField
                         hiddenLabel
                         id="filled-multiline-static"
+                        onChange={(e) => {
+                            setWorkerDescription(e.target.value);
+                            localStorage.setItem('workerDescription', e.target.value);
+                        }}
                         multiline
                         rows={3}
-                        defaultValue=""
+                        defaultValue={workerDescription}
                         variant="filled"
                         fullWidth
                     />
@@ -48,7 +55,11 @@ const FastGeneration: React.FC = () => {
                     <TextField
                         hiddenLabel
                         id="filled-basic"
-                        defaultValue=""
+                        onChange={(e) => {
+                            setAboutCompany(e.target.value);
+                            localStorage.setItem('aboutCompany', e.target.value);
+                        }}
+                        defaultValue={aboutCompany}
                         variant="filled"
                         fullWidth
                         sx={{ paddingBottom: "5px" }}

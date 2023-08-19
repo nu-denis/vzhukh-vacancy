@@ -3,7 +3,14 @@ export type ShortVacancy = {
     response: string;
 }
 
+type Step = {
+    request: string;
+    response: string;
+}
+
 export type Vacancy = {
-    currentPage: string;
-    allPages: string[];
+    firstStep: Step;
+    secondStep: Step;
+    thirdStep: Step;
+    fourth: Step;
 }
