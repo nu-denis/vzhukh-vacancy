@@ -22,7 +22,7 @@ const Rewriter: React.FC = () => {
                 spacing={1}
                 sx={{ width: "100%" }}
             >
-                <Typography variant="body2" component="p">
+                <Typography variant="body1" component="p">
                     Вставьте ссылку на вакансию hh.ru
                 </Typography>
                 <TextField
@@ -37,10 +37,14 @@ const Rewriter: React.FC = () => {
                 <Button variant="contained" href="">
                     Переписать
                 </Button>
-                </Stack>
-            
-            <Box sx={{ width: "100%" }}>
-                <Typography variant="body2" component="p" sx={{ paddingBottom: "5px" }}>
+            </Stack>
+            <Stack
+                direction="column"
+                justifyContent="center"
+                spacing={1}
+                sx={{ width: "100%" }}
+            >
+                <Typography variant="body1" component="p" sx={{ paddingBottom: "5px" }}>
                     Ваша вакансия
                 </Typography>
                 <TextField
@@ -51,18 +55,17 @@ const Rewriter: React.FC = () => {
                     defaultValue=""
                     variant="filled"
                     fullWidth
+                    sx={{ paddingBottom: "5px" }}
                 />
-            </Box>
-            
-            <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                <Button variant="outlined" href="/">
-                    Вернуться
-                </Button>
-                <Button variant="contained" href="">
-                    Сохранить изменения
-                </Button>
-            </Box>
-            
+                <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                    <Button variant="outlined" href="/">
+                        Вернуться
+                    </Button>
+                    <Button variant="contained" href="">
+                        Сохранить изменения
+                    </Button>
+                </Box>
+            </Stack>  
         </Stack>
     );
 };

@@ -12,9 +12,9 @@ const Router: React.FC = () => {
         <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/rewriter" element={<Rewriter />} />
-            <Route path="/creater/title" element={<Title />} />
-            <Route path="/creater/functions" element={<Functions />} />
-            <Route path="/creater/prerequisites" element={<Prerequisites />} />
+            <Route path="/creator/title" element={<Title />} />
+            <Route path="/creator/functions" element={<Functions />} />
+            <Route path="/creator/prerequisites" element={<Prerequisites />} />
         </Routes>
     );
 };

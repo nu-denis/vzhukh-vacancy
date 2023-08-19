@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -8,12 +7,13 @@ export default function BasicBreadcrumbs() {
         <Stack
             direction="row"
             justifyContent="center"
+            sx={{ backgroundColor: "#eee", padding: "10px", borderRadius: "5px" }}
         >
             <Breadcrumbs aria-label="breadcrumb">
                 <Link
                     underline="hover"
                     color="inherit" 
-                    href="/creater/title"
+                    href="/creator/title"
                     onClick={() => {
                         console.info("I'm a button.");
                     }}
@@ -23,14 +23,14 @@ export default function BasicBreadcrumbs() {
                 <Link
                     underline="hover"
                     color="inherit"
-                    href="/creater/functions"
+                    href="/creator/functions"
                 >
                     Обязанности
                 </Link>
                 <Link
                     underline="hover"
                     color="inherit"
-                    href="/creater/prerequisites"
+                    href="/creator/prerequisites"
                 >
                     Требования
                 </Link>
